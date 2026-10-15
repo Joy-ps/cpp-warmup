@@ -135,13 +135,38 @@ int main() {
     // =================================================================
 
     cout << "=== Q2 ===\n";
-
-
-
-
-
+    int countA=0, countB=0, countC=0;
+    double totalA=0.0, totalB=0.0, totalC=0.0;
+    for (const auto&a:logbook) {
+        if (a.grade == 'A') {
+            countA++;
+            totalA+=a.kg;
+        } else if (a.grade=='B') {
+            countB++;
+            totalB += a.kg;
+        } else if (a.grade=='C') {
+            countC++;
+            totalC+=a.kg;
+        }
+    }
+    double avgA = (totalA / countA);
+    double avgB = (totalB / countB);
+    double avgC = (totalC / countC);
+    cout << "Grade A: " << countA << " deliveries, " << totalA << " kg total, " << avgA << " kg average\n";
+    cout << "Grade B: " << countB << " deliveries, " << totalB << " kg total, " << avgB << " kg average\n";
+    cout << "Grade C: " << countC << " deliveries, " << totalC << " kg total, " << avgC << " kg average\n";
+    char bestGrade = 'A';
+    double bestAvg = avgA;
+    if (avgB > bestAvg) {
+        bestAvg = avgB;
+        bestGrade = 'B';
+    }
+    if (avgC > bestAvg) {
+        bestAvg = avgC;
+        bestGrade = 'C';
+    }
+    cout << "Best average: grade " << bestGrade << "\n";
     cout << "\n";
-
 
     // =================================================================
     //  Q3  ·  WHO IS WHO                    (see README)
