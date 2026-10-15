@@ -158,12 +158,12 @@ int main() {
     char bestGrade = 'A';
     double bestAvg = avgA;
     if (avgB > bestAvg) {
-        bestAvg = avgB;
-        bestGrade = 'B';
+        bestAvg=avgB;
+        bestGrade='B';
     }
     if (avgC > bestAvg) {
-        bestAvg = avgC;
-        bestGrade = 'C';
+        bestAvg=avgC;
+        bestGrade='C';
     }
     cout << "Best average: grade " << bestGrade << "\n";
     cout << "\n";
