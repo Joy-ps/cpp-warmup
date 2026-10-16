@@ -121,12 +121,34 @@ int main() {
     // =================================================================
 
     cout << "=== Q1 ===\n";
-
-
-
-
-
-    cout << "\n";
+    double totalWeight=0.0;
+    int validCount=0;
+    double heaviestWeight=morningWeights[0];
+    int heaviestP=0;
+    int currentRun=0;
+    int longestRun=0;
+    for (int i=0; i<morningWeights.size(); ++i){
+       double w = morningWeights[i];
+       totalWeight+=w;
+       if (w > heaviestWeight) {
+           heaviestWeight=w;
+           heaviestP=int(i);
+       }
+       if (w >0 && w<= 80) {
+           validCount++;
+           currentRun++;
+           if (currentRun > longestRun) {
+               longestRun = currentRun;
+           }
+       } else {
+           currentRun = 0;
+       }
+   }
+   cout << "Total: " << totalWeight << " kg\n";
+   cout << "Valid: " << validCount << " of " << morningWeights.size() << "\n";
+   cout << "Heaviest: " << heaviestWeight << " kg at position " << heaviestP << "\n";
+   cout << "Longest valid run: " << longestRun << "\n";
+   cout << "\n";
 
 
     // =================================================================
