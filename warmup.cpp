@@ -347,9 +347,29 @@ int main() {
     // =================================================================
 
     cout << "=== Q6 ===\n";
-
-
-
+    int current = 6;
+    int laps = 0;
+    int lastPit = 6;
+    int seeds = board[6];
+    board[6] = 0;
+    while (seeds > 0) {
+    while (seeds > 0) {
+        current = (current % 16) + 1;
+        board[current]++;
+        seeds = seeds - 1;
+        lastPit = current;
+    }
+    laps = laps + 1;
+    if (board[current] == 1) {
+        break;
+    }
+    seeds = board[current];
+    board[current] = 0;
+    }
+    cout << "Final board: ";
+    printBoard(board);
+    cout << "Landed in pit " << lastPit<< " after " << laps << " laps\n\n";
+     
     
     // =================================================================
     //  STRETCH  ·  optional
