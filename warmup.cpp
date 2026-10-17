@@ -281,11 +281,64 @@ int main() {
     // =================================================================
 
     cout << "=== Q5 ===\n";
-
-
-
-
-
+    int accepted = 0;
+    int rejected = 0;
+    for (int i = 0; i < rawRecords.size(); i++) {
+        string reason = "";
+        if (rawRecords[i].id.length() != 4 ||
+            rawRecords[i].id[0] != 'F' ||
+            rawRecords[i].id[1] < '0' ||
+            rawRecords[i].id[1] > '9' ||
+            rawRecords[i].id[2] < '0' ||
+            rawRecords[i].id[2] > '9' ||
+            rawRecords[i].id[3] < '0' ||
+            rawRecords[i].id[3] > '9') {
+            reason = "bad id";
+        }
+        else if (rawRecords[i].kg == "") {
+            reason = "weight missing";
+        }
+        else {
+            bool isNumber = true;
+            bool hasDigit = false;
+            for (int j = 0; j < rawRecords[i].kg.length(); j++) {
+                char c = rawRecords[i].kg[j];
+                if (c >= '0' && c <= '9') {
+                    hasDigit = true;
+                }
+                else if (c != '.') {
+                    isNumber = false;
+                }
+            }
+            if (!hasDigit) {
+                isNumber = false;
+            }
+            if (!isNumber) {
+                reason = "weight not a number";
+            }
+            else {
+                double kg = stod(rawRecords[i].kg);
+                if (kg <= 0 || kg > 80) {
+                    reason = "weight out of range";
+                }
+                else if (rawRecords[i].grade != 'A' &&
+                         rawRecords[i].grade != 'a' &&
+                         rawRecords[i].grade != 'B' &&
+                         rawRecords[i].grade != 'b' &&
+                         rawRecords[i].grade != 'C' &&
+                         rawRecords[i].grade != 'c') {
+                    reason = "unknown grade";
+                }
+            }
+        }
+        if (reason == "") {
+            cout << rawRecords[i].id << " ACCEPT\n"; accepted++;
+        }
+        else {
+            cout << rawRecords[i].id << " REJECT - " << reason << "\n";rejected++;
+        }
+    }
+    cout << accepted << " accepted, "<< rejected << " rejected\n\n";
     cout << "\n";
 
     // =================================================================
