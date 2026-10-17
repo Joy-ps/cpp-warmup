@@ -90,8 +90,21 @@ int findFarmer(const vector<Delivery> &log, string name) {
             return i;
         }
     }
-
     return -1;
+}
+
+double payment(double kg, char grade) {
+    double rate = 450;
+    if (grade == 'A') {
+        rate = rate * 1.10;
+    }
+    else if (grade == 'B') {
+        rate = rate;
+    }
+    else {
+        rate = rate * 0.80;
+    }
+    return kg * rate;
 }
 
 int main() {
@@ -241,11 +254,24 @@ int main() {
     // =================================================================
 
     cout << "=== Q4 ===\n";
-
-
-
-
-
+    double totalPaid = 0;
+    for (Delivery a : logbook) {
+        double amount = payment(a.kg, a.grade);
+        bool halved = false;
+        if (totalPaid > 100000) {
+            amount = amount / 2;
+            halved = true;
+        }
+        cout << a.farmer << " "
+             << a.kg << " kg grade " << a.grade
+             << " -> " << amount;
+        if (halved) {
+            cout << " (halved)";
+        }
+        cout << "\n";
+        totalPaid += amount;
+    }
+    cout << "Total paid: " << totalPaid << "\n\n";
     cout << "\n";
 
 
@@ -313,17 +339,8 @@ int main() {
 
 // Q3:  return the position of the first delivery by this farmer,
 //      or -1 if the farmer is not in the log at all.
-//
-// int findFarmer(const vector<Delivery> &log, string name) {
-//
-// }
-int findFarmer(const vector<Delivery> &log, string name);
 
 
 // Q4:  what one delivery earns, before any cap is applied.
 //      Grade A pays 10% above the rate, B pays the rate,
 //      anything else pays 20% below it. The rate is 450.
-//
-// double payment(double kg, char grade) {
-//
-// }
