@@ -84,6 +84,15 @@ void printBoard(const vector<int> &b) {
     cout << "\n";
 }
 
+int findFarmer(const vector<Delivery> &log, string name) {
+    for (int i = 0; i < log.size(); i++) {
+        if (log[i].farmer == name) {
+            return i;
+        }
+    }
+
+    return -1;
+}
 
 int main() {
 
@@ -196,11 +205,33 @@ int main() {
     // =================================================================
 
     cout << "=== Q3 ===\n";
-
-
-
-
-
+    cout << "findFarmer(Isanda) = " << findFarmer(logbook, "Isanda") << "\n";
+    cout << "findFarmer(Mukamana) = " << findFarmer(logbook, "Mukamana") << "\n";
+    string bFarmer = "";
+    int mostDeliveries = 0;
+    string aFarmer = "";
+    double mostKg = 0;
+    for (int i = 0; i < logbook.size(); i++) {
+        string name = logbook[i].farmer;
+        int deliveries = 0;
+        double totalKg = 0;
+        for (int j = 0; j < logbook.size(); j++) {
+            if (logbook[j].farmer == name) {
+                deliveries++;
+                totalKg += logbook[j].kg;
+            }
+        }
+        if (deliveries > mostDeliveries) {
+            mostDeliveries = deliveries;
+            bFarmer = name;
+        }
+        if (totalKg > mostKg) {
+            mostKg = totalKg;
+            aFarmer = name;
+        }
+    }
+    cout << "Most deliveries: " << bFarmer<< " (" << mostDeliveries << ")\n";
+    cout << "Most kg: " << aFarmer<< " (" << mostKg << " kg)\n\n";
     cout << "\n";
 
 
@@ -286,6 +317,7 @@ int main() {
 // int findFarmer(const vector<Delivery> &log, string name) {
 //
 // }
+int findFarmer(const vector<Delivery> &log, string name);
 
 
 // Q4:  what one delivery earns, before any cap is applied.
